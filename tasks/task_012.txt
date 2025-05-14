@@ -1,0 +1,11 @@
+# Task ID: 12
+# Title: 다국어 지원 기능 구현
+# Status: pending
+# Dependencies: 1
+# Priority: low
+# Description: 영어 기본, 한국어 전환이 가능한 다국어 지원 기능을 추가합니다.
+# Details:
+프론트엔드에서 i18next로 다국어 지원을 구현하고, UI에 언어 전환 버튼을 만드세요. 필요시 OpenAI API로 자동 번역 기능도 추가합니다.
+
+# Test Strategy:
+영어와 한국어 모두에서 모든 콘텐츠가 올바르게 번역되고, 언어 전환이 정상 동작하는지 확인합니다.

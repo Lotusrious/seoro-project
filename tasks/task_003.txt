@@ -1,0 +1,43 @@
+# Task ID: 3
+# Title: 이슈 댓글/좋아요/싫어요/리트윗 기능 구현
+# Status: pending
+# Dependencies: 2
+# Priority: high
+# Description: 트렌드 이슈 해설에 댓글, 좋아요, 싫어요, 리트윗 등 유저 상호작용 기능을 추가합니다.
+# Details:
+React로 UI를 만들고, Firebase Firestore에 댓글/반응 데이터를 저장합니다. 실시간 반영 및 알림 기능도 고려합니다.
+
+# Test Strategy:
+모든 상호작용 기능이 정상 동작하고, 데이터가 실시간으로 반영되는지 테스트합니다.
+
+# Subtasks:
+## 1. Firestore 데이터 구조 설계 및 구축 [pending]
+### Dependencies: None
+### Description: 댓글, 좋아요, 싫어요, 리트윗 등 각 상호작용 데이터를 저장할 Firestore 컬렉션 및 문서 구조를 설계하고 생성합니다.
+### Details:
+이슈별로 comments, likes, dislikes, retweets 서브컬렉션을 만들고, 각 문서에 유저 ID, 타임스탬프, 내용(댓글의 경우) 등을 저장합니다. Firestore 규칙을 설정해 데이터 무결성과 보안을 확보합니다.
+
+## 2. React UI 컴포넌트 구현 [pending]
+### Dependencies: 3.1
+### Description: 댓글 입력/목록, 좋아요/싫어요/리트윗 버튼 등 유저 상호작용을 위한 React 컴포넌트를 구현합니다.
+### Details:
+각 이슈 상세 페이지에 댓글 입력창, 댓글 리스트, 좋아요/싫어요/리트윗 버튼을 배치합니다. 각 버튼과 입력창은 상태(state)와 props를 활용해 동작하도록 구현합니다. 버튼 클릭 시 해당 상호작용이 Firestore에 반영되도록 이벤트 핸들러를 연결합니다.
+
+## 3. Firestore 연동 및 CRUD 기능 구현 [pending]
+### Dependencies: 3.2
+### Description: React 컴포넌트와 Firestore를 연동하여 댓글 작성/삭제, 좋아요/싫어요/리트윗 추가 및 취소 등 CRUD 기능을 구현합니다.
+### Details:
+Firebase SDK를 사용해 댓글 추가/삭제, 좋아요/싫어요/리트윗 토글 기능을 구현합니다. 각 상호작용 시 Firestore에 데이터가 실시간으로 반영되도록 합니다.
+
+## 4. 실시간 반영 및 UI 동기화 구현 [pending]
+### Dependencies: 3.3
+### Description: Firestore의 실시간 리스너를 활용해 댓글/반응 데이터가 실시간으로 UI에 반영되도록 구현합니다.
+### Details:
+onSnapshot 등 Firestore의 실시간 구독 기능을 사용해 댓글, 좋아요, 싫어요, 리트윗 수치 및 목록이 즉시 갱신되도록 합니다. 여러 사용자가 동시에 상호작용할 때도 UI가 실시간으로 동기화됩니다.
+
+## 5. 알림 기능 및 통합 테스트 [pending]
+### Dependencies: 3.4
+### Description: 댓글/좋아요/싫어요/리트윗 발생 시 알림 기능을 구현하고, 전체 기능을 통합 테스트합니다.
+### Details:
+Firestore 트리거 또는 클라이언트 로직을 활용해 본인 이슈에 댓글/반응이 달릴 때 알림을 표시합니다. 모든 상호작용 기능이 정상 동작하는지 시나리오별로 통합 테스트를 진행합니다.
+

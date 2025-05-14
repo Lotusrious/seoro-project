@@ -1,0 +1,11 @@
+# Task ID: 7
+# Title: 트립메이트 매칭 서비스 설계 (후순위)
+# Status: pending
+# Dependencies: 1
+# Priority: low
+# Description: 사용자 프로필, 관심 지역, 언어, 여행 스타일 등 기반으로 여행 메이트를 매칭하는 서비스의 기초 설계를 진행합니다.
+# Details:
+Bumble 스타일의 매칭 카드 UI, Firebase Firestore에 프로필 저장, 매칭 알고리즘 설계, 1:1 채팅(Firebase Chat) 구조 설계 등 기초만 우선 구현합니다.
+
+# Test Strategy:
+프로토타입에서 매칭 흐름이 직관적이고, 데이터 구조가 확장 가능한지 검토합니다.

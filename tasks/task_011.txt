@@ -1,0 +1,43 @@
+# Task ID: 11
+# Title: Firebase → Spring Boot 마이그레이션 설계
+# Status: pending
+# Dependencies: 1
+# Priority: medium
+# Description: 향후 Spring Boot로 백엔드 이전이 쉽도록 데이터 구조와 인터페이스를 설계합니다.
+# Details:
+Firebase Firestore/Storage 구조를 문서화하고, Spring Boot로 이전 시 필요한 API/DB 구조를 미리 설계합니다. 마이그레이션 체크리스트를 작성합니다.
+
+# Test Strategy:
+설계 문서가 충분히 구체적이고, 실제 이전 시 무리 없이 적용 가능한지 검토합니다.
+
+# Subtasks:
+## 1. Firebase Firestore/Storage 데이터 구조 문서화 [pending]
+### Dependencies: None
+### Description: 현재 사용 중인 Firebase Firestore 및 Storage의 데이터 구조와 컬렉션, 필드, 관계를 상세히 문서화합니다.
+### Details:
+Firestore의 각 컬렉션, 도큐먼트 구조, 필드 타입, Storage의 폴더 구조와 파일 저장 방식을 표와 다이어그램으로 정리합니다. 데이터 예시와 함께 각 필드의 역할을 설명합니다.
+
+## 2. Spring Boot용 데이터베이스 모델 설계 [pending]
+### Dependencies: 11.1
+### Description: 문서화된 Firebase 데이터 구조를 기반으로 관계형 데이터베이스(MySQL, PostgreSQL 등) 또는 NoSQL(MongoDB 등)로 이전할 데이터베이스 모델을 설계합니다.
+### Details:
+ERD(Entity Relationship Diagram) 작성, 테이블/컬렉션 설계, 각 필드의 타입 및 제약조건 정의. 기존 Firestore 구조와의 매핑 관계를 명확히 표시합니다.
+
+## 3. Spring Boot API 인터페이스 설계 [pending]
+### Dependencies: 11.2
+### Description: Spring Boot에서 사용할 REST API 엔드포인트, 요청/응답 데이터 포맷, 인증 방식 등을 설계합니다.
+### Details:
+CRUD 중심의 엔드포인트 목록 작성, 각 API의 URI, HTTP 메서드, 요청/응답 JSON 스키마 정의. 인증/인가(예: JWT) 방식도 설계에 포함합니다.
+
+## 4. 마이그레이션 체크리스트 작성 [pending]
+### Dependencies: 11.1, 11.2, 11.3
+### Description: Firebase에서 Spring Boot로 이전 시 필요한 단계별 체크리스트를 작성합니다.
+### Details:
+데이터 이전, 코드 수정, 환경설정, 테스트 등 마이그레이션에 필요한 모든 작업을 순서대로 정리합니다. 각 단계별 주의사항과 예상 이슈도 포함합니다.
+
+## 5. 마이그레이션 설계 검증 및 테스트 전략 수립 [pending]
+### Dependencies: 11.4
+### Description: 설계된 데이터 구조, API, 체크리스트가 실제로 동작 가능한지 검증하고, 마이그레이션 후 테스트 전략을 수립합니다.
+### Details:
+설계 문서를 바탕으로 샘플 데이터 이전 및 API Mock 테스트를 진행합니다. 데이터 정합성, API 정상 동작, 보안 등 주요 테스트 항목을 정의합니다.
+

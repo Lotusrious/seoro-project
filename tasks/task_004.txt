@@ -1,0 +1,11 @@
+# Task ID: 4
+# Title: 여행 후기 작성 및 공유 기능
+# Status: pending
+# Dependencies: 1
+# Priority: medium
+# Description: 사용자가 여행 중 방문한 장소, 사진, 감상 등을 공유할 수 있는 기능을 구현합니다. 지도와 연동해 팝업으로 요약 정보를 제공합니다.
+# Details:
+React로 후기 작성 폼을 만들고, 사진 업로드는 Firebase Storage를 사용합니다. 후기 데이터는 Firestore에 저장하고, 지도에 핀과 팝업으로 표시합니다.
+
+# Test Strategy:
+후기 작성, 사진 업로드, 데이터 저장 및 지도 연동이 정상적으로 동작하는지 확인합니다.
