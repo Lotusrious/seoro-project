@@ -1,20 +1,8 @@
 import React from 'react';
-import Header from './components/Header';
-import Banner from './components/Banner';
-import InfiniteFeed from './components/InfiniteFeed';
-import Footer from './components/Footer';
+import MainPage from './pages/MainPage';
 
 function App() {
-  return (
-    <>
-      <Header />
-      <main>
-        <Banner />
-        <InfiniteFeed />
-      </main>
-      <Footer />
-    </>
-  );
+  return <MainPage />;
 }
 
 export default App;
