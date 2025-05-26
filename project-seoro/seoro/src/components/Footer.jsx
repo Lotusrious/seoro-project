@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="flex flex-col gap-6 px-5 py-10 text-center @container">
+    <footer className="flex flex-col gap-6 px-5 py-7 text-center @container">
       <div className="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
         <a className="text-[#65867a] text-base font-normal leading-normal min-w-40" href="#">About Us</a>
         <a className="text-[#65867a] text-base font-normal leading-normal min-w-40" href="#">Contact</a>

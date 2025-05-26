@@ -15,9 +15,9 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f3] px-4 sm:px-10 py-3 relative z-50">
+    <header className="bg-white shadow-sm flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f3] px-4 sm:px-10 py-0.5 relative z-50">
       <div className="flex items-center gap-2 sm:gap-4 text-[#121715] cursor-pointer" onClick={handleLogoClick}>
-        <img src={logoSrc} alt="Seoro Logo" className="size-16" />
+        <img src={logoSrc} alt="Seoro Logo" className="size-20" />
       </div>
       <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4 md:gap-8">
         <nav className="hidden md:flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-9">

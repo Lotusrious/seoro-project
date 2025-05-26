@@ -132,7 +132,7 @@ function MainPage() {
           initial="initial"
           animate="animate"
           exit="exit"
-          className={`page-${currentPage} absolute inset-0 pt-16`}
+          className={`page-${currentPage} absolute inset-0 pt-24`}
           style={{ willChange: 'transform, opacity' }} 
           onAnimationComplete={() => {
             console.log('Animation complete, unlocking scroll');
