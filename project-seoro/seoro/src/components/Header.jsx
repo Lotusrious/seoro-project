@@ -1,12 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import logoSrc from '../assets/logo.png';
 
 const Header = () => {
+  const navigate = useNavigate();
   const menuItemStyle = "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-white text-[#121715] text-sm font-medium leading-normal tracking-[0.015em] hover:bg-gray-200 transition-colors duration-150";
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
 
   return (
     <header className="bg-white shadow-sm flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f3] px-4 sm:px-10 py-3 relative z-50">
-      <div className="flex items-center gap-2 sm:gap-4 text-[#121715]">
+      <div className="flex items-center gap-2 sm:gap-4 text-[#121715] cursor-pointer" onClick={handleLogoClick}>
         <img src={logoSrc} alt="Seoro Logo" className="size-16" />
       </div>
       <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4 md:gap-8">
@@ -14,15 +24,15 @@ const Header = () => {
           <button 
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-white text-[#121715] text-sm font-medium leading-normal tracking-[0.015em] hover:bg-gray-200 transition-colors duration-150"
           >
-            <span className="truncate">이슈 해설</span>
+            <span className="truncate">이달의 키워드</span>
           </button>
           <button className={menuItemStyle}>
             <span className="truncate">여행 후기</span>
           </button>
         </nav>
         <div className="flex items-center gap-2">
-          <button className={menuItemStyle}>
-            <span className="truncate">로그인/가입</span>
+          <button className={menuItemStyle} onClick={handleLoginClick}>
+            <span className="truncate">로그인</span>
           </button>
           <button
             className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-white text-[#121715] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-gray-200 transition-colors duration-150"
