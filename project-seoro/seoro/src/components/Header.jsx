@@ -2,25 +2,30 @@ import React from 'react';
 import logoSrc from '../assets/logo.png';
 
 const Header = () => {
+  const menuItemStyle = "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-white text-[#121715] text-sm font-medium leading-normal tracking-[0.015em] hover:bg-gray-200 transition-colors duration-150";
+
   return (
-    <header className="bg-white shadow-sm flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f3] px-10 py-3">
-      <div className="flex items-center gap-4 text-[#121715]">
+    <header className="bg-white shadow-sm flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f3] px-4 sm:px-10 py-3 relative z-50">
+      <div className="flex items-center gap-2 sm:gap-4 text-[#121715]">
         <img src={logoSrc} alt="Seoro Logo" className="size-16" />
       </div>
-      <div className="flex flex-1 justify-end gap-8">
-        <div className="flex items-center gap-9">
-          <a className="text-[#121715] text-sm font-medium leading-normal" href="#">Issue Commentary</a>
-          <a className="text-[#121715] text-sm font-medium leading-normal" href="#">Regional Recommendations</a>
-          <a className="text-[#121715] text-sm font-medium leading-normal" href="#">Travel Reviews</a>
-        </div>
-        <div className="flex gap-2">
-          <button
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f0f4f3] text-[#121715] text-sm font-bold leading-normal tracking-[0.015em]"
+      <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4 md:gap-8">
+        <nav className="hidden md:flex items-center gap-3 sm:gap-4 md:gap-6 lg:gap-9">
+          <button 
+            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-white text-[#121715] text-sm font-medium leading-normal tracking-[0.015em] hover:bg-gray-200 transition-colors duration-150"
           >
-            <span className="truncate">Login/Register</span>
+            <span className="truncate">이슈 해설</span>
+          </button>
+          <button className={menuItemStyle}>
+            <span className="truncate">여행 후기</span>
+          </button>
+        </nav>
+        <div className="flex items-center gap-2">
+          <button className={menuItemStyle}>
+            <span className="truncate">로그인/가입</span>
           </button>
           <button
-            className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#f0f4f3] text-[#121715] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-white text-[#121715] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-gray-200 transition-colors duration-150"
           >
             <div className="text-[#121715]" data-icon="Globe" data-size="20px" data-weight="regular">
               <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">

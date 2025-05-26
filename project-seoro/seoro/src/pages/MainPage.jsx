@@ -1,176 +1,170 @@
-import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
-import logo from '../assets/logo.png'; // 로고 경로에 맞게 수정
-import * as d3 from "d3";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import Keywords from '../components/Keywords';
+import Regions from '../components/Regions';
+import AIChat from '../components/AIChat';
+import Features from '../components/Features';
+import Footer from '../components/Footer';
 
-const KEYWORDS = [
-  "다채로운", "다양한", "난잡한", "흥미를 끄는", "인상적인",
-  "직관적인", "열정적인", "깔끔한", "이해하기어려운", "단순한"
+const MapPreviewWithFooter = () => ( 
+  <div className="h-full flex flex-col">
+    <div className="flex-grow flex flex-col items-center justify-center p-4 text-center bg-gray-100">
+      <h2 className="text-[#121715] text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-[-0.015em] mb-5">
+        Map Preview
+      </h2>
+      <p className="text-[#65867a] text-base sm:text-lg mb-5">
+        Interactive map preview showcasing recommended locations.
+      </p>
+      <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-solid border-[#e3e9e7]">
+        <img
+          className="aspect-video w-full h-full object-cover"
+          src="https://cdn.builder.io/api/v1/image/assets%2Ffc1925337f244c7cadd70e30b582298e%2Fa4f2465d824f4e119375292960a07b44"
+          alt="Map preview"
+        />
+      </div>
+      <button className="mt-5 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f0f4f3] text-[#121715] text-sm font-bold leading-normal tracking-[0.015em]">
+        <span className="truncate">View Recommended Itinerary</span>
+      </button>
+    </div>
+    <Footer /> 
+  </div>
+);
+
+const sections = [
+  { id: 'hero', Component: Hero },
+  { id: 'keywords', Component: Keywords },
+  { id: 'regions', Component: Regions },
+  { id: 'aiChat', Component: AIChat },
+  { id: 'features', Component: Features },
+  {
+    id: 'mapPreview',
+    Component: MapPreviewWithFooter,
+  },
 ];
 
-const KeywordSection = styled.svg`
-  flex: 1;
-  min-width: 600px;
-  min-height: 500px;
-  width: 100%;
-  height: 500px;
-  background: transparent;
-  display: block;
-`;
-
-const MainPage = () => {
-  const [nodes, setNodes] = useState([]);
-  const width = 600;
-  const height = 500;
-
-  useEffect(() => {
-    // 각 키워드에 더 작은 랜덤 크기 부여(짤림 방지)
-    const data = KEYWORDS.map((word, i) => ({
-      id: i,
-      word,
-      r: 35 + Math.random() * 20 // 반지름 35~55px로 축소
-    }));
-
-    // D3 forceSimulation으로 겹치지 않게 배치
-    const simulation = d3.forceSimulation(data)
-      .force("charge", d3.forceManyBody().strength(5))
-      .force("center", d3.forceCenter(width / 2, height / 2))
-      .force("collision", d3.forceCollide().radius(d => d.r + 4))
-      .stop();
-
-    for (let i = 0; i < 200; ++i) simulation.tick();
-
-    setNodes([...data]);
-  }, []);
-
-  return (
-    <Container>
-      <Header>
-        <Logo src={logo} alt="Seoro 로고" />
-        <Nav>
-          <NavItem>여행지</NavItem>
-          <NavItem>트렌드</NavItem>
-          <NavItem>리뷰</NavItem>
-          <NavItem>로그인</NavItem>
-        </Nav>
-      </Header>
-      <MainSection>
-        <Left>
-          <Title>
-            기존에 경험하지 못한<br />
-            <Highlight>새로운 국내 여행 플랫폼</Highlight>
-          </Title>
-          <Subtitle>
-            고민만 하던 국내 여행 계획, <b>Seoro</b>와 함께라면<br />
-            몇 분 만에 쉽고 빠르게 완성할 수 있어요.
-          </Subtitle>
-          <CTAButton>Seoro 시작하기</CTAButton>
-        </Left>
-        <KeywordSection width={width} height={height}>
-          {nodes.map((d, i) => (
-            <g key={i} transform={`translate(${d.x},${d.y})`}>
-              <circle
-                r={d.r}
-                fill={i % 3 === 0 ? "#111" : "#4FC3F7"}
-                stroke="#fff"
-                strokeWidth={3}
-                style={{ filter: "drop-shadow(0 2px 12px #0002)", cursor: "pointer" }}
-              />
-              <text
-                textAnchor="middle"
-                dy="0.35em"
-                fill="#fff"
-                fontWeight="bold"
-                fontSize={d.r / 2.5}
-                style={{ pointerEvents: "none" }}
-              >
-                {d.word}
-              </text>
-            </g>
-          ))}
-        </KeywordSection>
-      </MainSection>
-      <Stats>
-        <StatItem>
-          <StatNumber>232,191</StatNumber>
-          <StatLabel>AI로 생성된 일정 수</StatLabel>
-        </StatItem>
-        <StatItem>
-          <StatNumber>96</StatNumber>
-          <StatLabel>여행지 수</StatLabel>
-        </StatItem>
-      </Stats>
-    </Container>
-  );
+const pageVariants = {
+  initial: (direction) => ({
+    y: direction > 0 ? '100vh' : '-100vh',
+    opacity: 0,
+  }),
+  animate: {
+    y: '0vh',
+    opacity: 1,
+    transition: { duration: 0.7, ease: "easeInOut" },
+  },
+  exit: (direction) => ({
+    y: direction < 0 ? '100vh' : '-100vh',
+    opacity: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  }),
 };
 
-export default MainPage;
+function MainPage() { 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState(1);
+  const isScrolling = useRef(false);
+  const layoutRef = useRef(null);
 
-// styled-components 예시
-const Container = styled.div`
-  min-height: 100vh;
-  width: 100vw;
-  background: #fff;
-  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-`;
-const Header = styled.header`
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 32px 64px 0 64px;
-  min-height: 80px;
-`;
-const Logo = styled.img`
-  height: 36px;
-`;
-const Nav = styled.nav`
-  display: flex; gap: 32px;
-`;
-const NavItem = styled.div`
-  font-size: 1.1rem; font-weight: 500; cursor: pointer;
-  color: #222;
-  &:hover { color: #4FC3F7; }
-`;
-const MainSection = styled.section`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 64px 10vw 0 10vw;
-  min-height: 0;
-  gap: 48px;
-`;
-const Left = styled.div`
-  flex: 1;
-  min-width: 280px;
-`;
-const Title = styled.h1`
-  font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 24px;
-`;
-const Highlight = styled.span`
-  color: #4FC3F7; // 로고 포인트 컬러
-`;
-const Subtitle = styled.p`
-  font-size: 1.2rem; color: #555; margin-bottom: 32px;
-`;
-const CTAButton = styled.button`
-  background: #FFD600; color: #222; font-weight: 700;
-  padding: 16px 36px; border: none; border-radius: 8px;
-  font-size: 1.1rem; cursor: pointer; box-shadow: 0 2px 8px #0001;
-  transition: background 0.2s;
-  &:hover { background: #FFEA00; }
-`;
-const Stats = styled.div`
-  display: flex; justify-content: center; gap: 64px; margin: 48px 0 0 0;
-  padding-bottom: 32px;
-`;
-const StatItem = styled.div`
-  text-align: center;
-`;
-const StatNumber = styled.div`
-  font-size: 2rem; font-weight: 700; color: #4FC3F7;
-`;
-const StatLabel = styled.div`
-  font-size: 1rem; color: #888;
-`;
+  const handleScroll = (event) => {
+    console.log('Scroll event detected:', event.deltaY, 'on element:', event.currentTarget);
+    event.preventDefault();
+    if (isScrolling.current) {
+      console.log('Scrolling is locked');
+      return;
+    }
+    console.log('Processing scroll...');
+
+    isScrolling.current = true;
+
+    const direction = event.deltaY > 0 ? 1 : -1;
+    setScrollDirection(direction);
+
+    let newPageIndex = currentPage;
+    if (direction === 1 && currentPage < sections.length - 1) {
+      newPageIndex = currentPage + 1;
+    } else if (direction === -1 && currentPage > 0) {
+      newPageIndex = currentPage - 1;
+    }
+
+    if (newPageIndex !== currentPage) {
+      console.log('Attempting to change page to:', newPageIndex);
+      setCurrentPage(newPageIndex);
+    } else {
+      console.log('No page change, unlocking scroll immediately.');
+      isScrolling.current = false;
+    }
+  };
+
+  useEffect(() => {
+    const currentLayoutElement = layoutRef.current;
+    const wheelListener = (e) => handleScroll(e);
+
+    if (currentLayoutElement) {
+      console.log('Adding wheel event listener to layoutRef.current');
+      currentLayoutElement.addEventListener('wheel', wheelListener, { passive: false });
+    }
+
+    return () => {
+      if (currentLayoutElement) {
+        console.log('Removing wheel event listener from layoutRef.current');
+        currentLayoutElement.removeEventListener('wheel', wheelListener);
+      }
+    };
+  }, [currentPage]);
+
+  const CurrentSection = sections[currentPage].Component; 
+
+  return (
+    <div 
+      ref={layoutRef}
+      tabIndex={0}
+      className="relative h-screen w-screen bg-white outline-none"
+      style={{fontFamily: '"Plus Jakarta Sans", "Noto Sans", sans-serif'}}
+    >
+      <Header />
+      <AnimatePresence initial={false} custom={scrollDirection} mode="wait">
+        <motion.div 
+          key={currentPage} 
+          custom={scrollDirection}
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className={`page-${currentPage} absolute inset-0 pt-16`}
+          style={{ willChange: 'transform, opacity' }} 
+          onAnimationComplete={() => {
+            console.log('Animation complete, unlocking scroll');
+            isScrolling.current = false;
+          }}
+        >
+          <div className="h-full w-full">
+            <CurrentSection />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="fixed right-5 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
+        {sections.map((section, index) => (
+          <button
+            key={section.id}
+            onClick={() => {
+              if (isScrolling.current) return;
+              if (index !== currentPage) {
+                console.log('Pagination click to:', index);
+                setScrollDirection(index > currentPage ? 1 : -1);
+                isScrolling.current = true;
+                setCurrentPage(index);
+              }
+            }}
+            className={`w-3 h-3 rounded-full border border-gray-600 hover:bg-gray-400 transition-colors ${currentPage === index ? 'bg-gray-600' : 'bg-white'}`}
+            aria-label={`Go to section ${section.id}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default MainPage; 
