@@ -18,7 +18,7 @@ const MapPreviewWithFooter = () => (
         Interactive map preview showcasing recommended locations.
       </p>
       <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-solid border-[#e3e9e7]">
-        <img
+        <img 
           className="aspect-video w-full h-full object-cover"
           src="https://cdn.builder.io/api/v1/image/assets%2Ffc1925337f244c7cadd70e30b582298e%2Fa4f2465d824f4e119375292960a07b44"
           alt="Map preview"
