@@ -3,7 +3,7 @@ import logoSrc from '../assets/logo.png';
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f3] px-10 py-3">
+    <header className="bg-white shadow-sm flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f4f3] px-10 py-3">
       <div className="flex items-center gap-4 text-[#121715]">
         <img src={logoSrc} alt="Seoro Logo" className="size-16" />
       </div>
