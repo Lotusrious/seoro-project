@@ -1,8 +1,3 @@
-<!-- 배너 이미지 (banner.png) -->
-<p align="center">
-  <img src="./readmefile/banner.png" alt="Seoro 배너" width="50%" />
-</p>
-
 # Seoro - 외국인을 위한 국내 여행 플랫폼
 
 ## 프로젝트 개요
