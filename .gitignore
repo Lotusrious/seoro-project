@@ -70,4 +70,8 @@ dist/
 
 # Other common ignores
 coverage/
-*.tgz 
+*.tgz
+
+# Taskmaster / Cursor specific (optional, recommend to ignore)
+tasks/
+.cursor/ 
