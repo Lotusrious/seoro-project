@@ -65,13 +65,19 @@ const LoginPage = () => {
                   type="checkbox"
                   className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   로그인 상태 유지
                 </label>
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-amber-700 hover:text-amber-600">
+                <a
+                  href="#"
+                  className="font-medium text-amber-700 hover:text-amber-600"
+                >
                   비밀번호를 잊으셨나요?
                 </a>
               </div>
@@ -82,8 +88,12 @@ const LoginPage = () => {
                 type="submit"
                 style={{ backgroundColor: mainColor }}
                 className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = mainColorHover}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = mainColor}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = mainColorHover)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = mainColor)
+                }
               >
                 로그인
               </button>
@@ -108,7 +118,11 @@ const LoginPage = () => {
                   type="button"
                   className="w-full inline-flex items-center justify-center py-3 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
-                  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" className="w-5 h-5 mr-3" />
+                  <img
+                    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                    alt="Google logo"
+                    className="w-5 h-5 mr-3"
+                  />
                   Google 계정으로 로그인
                 </button>
               </div>
@@ -117,12 +131,14 @@ const LoginPage = () => {
             <div className="mt-6 text-center text-sm">
               <p className="text-gray-600">
                 계정이 없으신가요?
-                <Link to="/signup" className="font-medium text-amber-700 hover:text-amber-600 ml-1">
+                <Link
+                  to="/signup"
+                  className="font-medium text-amber-700 hover:text-amber-600 ml-1"
+                >
                   회원가입
                 </Link>
               </p>
             </div>
-
           </div>
         </div>
       </main>
@@ -131,4 +147,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage; 
+export default LoginPage;

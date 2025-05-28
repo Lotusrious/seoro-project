@@ -82,18 +82,27 @@ const SignupPage = () => {
                 required
                 className="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
               />
-              <label htmlFor="terms-agreement" className="ml-2 block text-sm text-gray-900">
+              <label
+                htmlFor="terms-agreement"
+                className="ml-2 block text-sm text-gray-900"
+              >
                 이용약관 및 개인정보처리방침에 동의합니다.
               </label>
             </div>
 
-            <div className="pt-4"> {/* 간격 조정 */}
+            <div className="pt-4">
+              {' '}
+              {/* 간격 조정 */}
               <button
                 type="submit"
                 style={{ backgroundColor: mainColor }}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500"
-                onMouseOver={(e) => e.currentTarget.style.backgroundColor = mainColorHover}
-                onMouseOut={(e) => e.currentTarget.style.backgroundColor = mainColor}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.backgroundColor = mainColorHover)
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.backgroundColor = mainColor)
+                }
               >
                 회원가입
               </button>
@@ -106,4 +115,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage; 
+export default SignupPage;

@@ -1,43 +1,23 @@
 # Task ID: 2
-# Title: 트렌드 이슈 해설 기능 구현 (1순위)
+# Title: 사용자 인증 구현 (Firebase)
 # Status: pending
 # Dependencies: 1
 # Priority: high
-# Description: Firecrawl과 Google Trends를 활용해 실시간 이슈를 수집하고, OpenAI API로 문화적·역사적 해설을 생성합니다. Kakao Map API로 관련 장소를 지도에 표시합니다.
+# Description: Firebase Authentication을 사용하여 웹 애플리케이션의 사용자 인증 시스템을 설정합니다.
 # Details:
-Firebase Firestore에 이슈 데이터를 저장하고, OpenAI API로 해설을 생성해 저장합니다. Kakao Map API를 연동해 이슈 관련 장소를 지도에 핀과 말풍선으로 표시합니다.
+1. React 앱에 Firebase Authentication을 설치하고 구성합니다.
+2. 이메일과 비밀번호를 사용한 가입 기능을 구현합니다.
+3. 로그인 기능을 구현합니다.
+4. 소셜 로그인 옵션(Google, Facebook 등)을 추가합니다.
+5. 인증된 사용자를 위한 보호된 라우트/페이지를 만듭니다.
+6. 로그아웃 기능을 구현합니다.
+7. Firestore에 사용자 프로필 데이터 구조를 설정합니다.
+8. 비밀번호 재설정 기능을 구현합니다.
 
 # Test Strategy:
-실제 이슈가 자동 수집되고, 해설이 생성되어 지도에 올바르게 표시되는지 확인합니다.
-
-# Subtasks:
-## 1. Firecrawl과 Google Trends를 활용한 실시간 이슈 수집 [pending]
-### Dependencies: None
-### Description: Firecrawl과 Google Trends API를 사용하여 실시간으로 트렌드 이슈를 수집합니다.
-### Details:
-Firecrawl과 Google Trends API를 연동하여 실시간으로 이슈를 수집하는 코드를 작성합니다. 이슈 데이터는 Firebase Firestore에 저장할 수 있도록 구조화합니다.
-
-## 2. OpenAI API로 문화적·역사적 해설 생성 [pending]
-### Dependencies: 2.1
-### Description: 수집된 이슈에 대해 OpenAI API를 사용하여 문화적·역사적 해설을 생성합니다.
-### Details:
-OpenAI API를 호출하여 수집된 이슈에 대한 해설을 생성하고, 생성된 해설을 Firebase Firestore에 저장합니다.
-
-## 3. Kakao Map API 연동 및 지도 표시 [pending]
-### Dependencies: 2.2
-### Description: Kakao Map API를 사용하여 이슈 관련 장소를 지도에 표시합니다.
-### Details:
-Kakao Map API를 연동하여 이슈 관련 장소를 지도에 핀과 말풍선으로 표시하는 코드를 작성합니다.
-
-## 4. Firebase Firestore에 데이터 저장 [pending]
-### Dependencies: 2.2
-### Description: 수집된 이슈 데이터와 생성된 해설을 Firebase Firestore에 저장합니다.
-### Details:
-Firebase Firestore에 데이터를 저장하기 위한 구조를 설계하고, 데이터를 저장하는 코드를 작성합니다.
-
-## 5. UI 구현 및 기능 통합 [pending]
-### Dependencies: 2.3, 2.4
-### Description: 앱의 UI를 구현하고, 각 기능을 통합하여 사용자에게 제공합니다.
-### Details:
-앱의 UI를 설계하고 구현하여 사용자가 이슈를 쉽게 탐색하고 해설을 볼 수 있도록 합니다. 각 기능을 통합하여 사용자에게 제공합니다.
-
+1. 유효한 입력과 유효하지 않은 입력으로 사용자 등록을 테스트합니다.
+2. 올바른 자격 증명과 잘못된 자격 증명으로 로그인 기능을 확인합니다.
+3. 소셜 로그인 통합을 테스트합니다.
+4. 인증 없이 보호된 라우트에 접근할 수 없는지 확인합니다.
+5. 로그아웃 기능을 확인합니다.
+6. 비밀번호 재설정 흐름을 테스트합니다.

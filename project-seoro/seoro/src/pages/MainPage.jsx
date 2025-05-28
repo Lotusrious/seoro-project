@@ -8,7 +8,7 @@ import AIChat from '../components/AIChat';
 import Features from '../components/Features';
 import Footer from '../components/Footer';
 
-const MapPreviewWithFooter = () => ( 
+const MapPreviewWithFooter = () => (
   <div className="h-full flex flex-col">
     <div className="flex-grow flex flex-col items-center justify-center p-4 text-center bg-gray-100">
       <h2 className="text-[#121715] text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-[-0.015em] mb-5">
@@ -18,7 +18,7 @@ const MapPreviewWithFooter = () => (
         Interactive map preview showcasing recommended locations.
       </p>
       <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-solid border-[#e3e9e7]">
-        <img 
+        <img
           className="aspect-video w-full h-full object-cover"
           src="https://cdn.builder.io/api/v1/image/assets%2Ffc1925337f244c7cadd70e30b582298e%2Fa4f2465d824f4e119375292960a07b44"
           alt="Map preview"
@@ -28,7 +28,7 @@ const MapPreviewWithFooter = () => (
         <span className="truncate">View Recommended Itinerary</span>
       </button>
     </div>
-    <Footer /> 
+    <Footer />
   </div>
 );
 
@@ -52,23 +52,28 @@ const pageVariants = {
   animate: {
     y: '0vh',
     opacity: 1,
-    transition: { duration: 0.7, ease: "easeInOut" },
+    transition: { duration: 0.7, ease: 'easeInOut' },
   },
   exit: (direction) => ({
     y: direction < 0 ? '100vh' : '-100vh',
     opacity: 0,
-    transition: { duration: 0.5, ease: "easeInOut" },
+    transition: { duration: 0.5, ease: 'easeInOut' },
   }),
 };
 
-function MainPage() { 
+function MainPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [scrollDirection, setScrollDirection] = useState(1);
   const isScrolling = useRef(false);
   const layoutRef = useRef(null);
 
   const handleScroll = (event) => {
-    console.log('Scroll event detected:', event.deltaY, 'on element:', event.currentTarget);
+    console.log(
+      'Scroll event detected:',
+      event.deltaY,
+      'on element:',
+      event.currentTarget,
+    );
     event.preventDefault();
     if (isScrolling.current) {
       console.log('Scrolling is locked');
@@ -103,7 +108,9 @@ function MainPage() {
 
     if (currentLayoutElement) {
       console.log('Adding wheel event listener to layoutRef.current');
-      currentLayoutElement.addEventListener('wheel', wheelListener, { passive: false });
+      currentLayoutElement.addEventListener('wheel', wheelListener, {
+        passive: false,
+      });
     }
 
     return () => {
@@ -114,26 +121,26 @@ function MainPage() {
     };
   }, [currentPage]);
 
-  const CurrentSection = sections[currentPage].Component; 
+  const CurrentSection = sections[currentPage].Component;
 
   return (
-    <div 
+    <div
       ref={layoutRef}
       tabIndex={0}
       className="relative h-screen w-screen bg-white outline-none"
-      style={{fontFamily: '"Plus Jakarta Sans", "Noto Sans", sans-serif'}}
+      style={{ fontFamily: '"Plus Jakarta Sans", "Noto Sans", sans-serif' }}
     >
       <Header />
       <AnimatePresence initial={false} custom={scrollDirection} mode="wait">
-        <motion.div 
-          key={currentPage} 
+        <motion.div
+          key={currentPage}
           custom={scrollDirection}
           variants={pageVariants}
           initial="initial"
           animate="animate"
           exit="exit"
           className={`page-${currentPage} absolute inset-0 pt-24`}
-          style={{ willChange: 'transform, opacity' }} 
+          style={{ willChange: 'transform, opacity' }}
           onAnimationComplete={() => {
             console.log('Animation complete, unlocking scroll');
             isScrolling.current = false;
@@ -167,4 +174,4 @@ function MainPage() {
   );
 }
 
-export default MainPage; 
+export default MainPage;

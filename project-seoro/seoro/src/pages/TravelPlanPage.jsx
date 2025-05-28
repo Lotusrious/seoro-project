@@ -9,4 +9,4 @@ const TravelPlanPage = () => {
   );
 };
 
-export default TravelPlanPage; 
+export default TravelPlanPage;

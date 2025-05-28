@@ -9,4 +9,4 @@ const TravelKeywordPage = () => {
   );
 };
 
-export default TravelKeywordPage; 
+export default TravelKeywordPage;

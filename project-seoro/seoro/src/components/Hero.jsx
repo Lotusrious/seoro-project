@@ -21,9 +21,7 @@ const Hero = () => {
         >
           <div className="flex-grow"></div>
           <div className="flex flex-wrap justify-center gap-3 pb-32">
-            <button
-              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#137553] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#0f573d] transition-colors duration-150"
-            >
+            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#137553] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#0f573d] transition-colors duration-150">
               <span className="truncate">지역별로 보기</span>
             </button>
             <button
