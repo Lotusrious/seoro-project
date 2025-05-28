@@ -1,0 +1,11 @@
+# Ignore artifacts:
+dist
+node_modules
+coverage
+
+# Ignore lock files
+package-lock.json
+yarn.lock
+
+# Ignore generated files (if any)
+# example: src/generated/ 
