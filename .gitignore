@@ -74,4 +74,8 @@ coverage/
 
 # Taskmaster / Cursor specific (optional, recommend to ignore)
 tasks/
-.cursor/ 
+.cursor/
+
+# Firebase
+.firebase
+firebase-debug.log 
