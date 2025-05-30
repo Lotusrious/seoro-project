@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics'; // getAnalytics import 주석 처리
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app); // Firebase Analytics 초기화 주석 처리
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 // export { app, analytics, db }; // 기존 export 주석 처리
-export { app, db }; // analytics를 제외하고 export
+export { app, db, auth }; // auth 추가하여 export
