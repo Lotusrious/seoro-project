@@ -4,7 +4,7 @@
       "id": 1,
       "title": "프로젝트 저장소 및 웹 개발 환경 설정",
       "description": "Seoro 여행 플랫폼을 위한 프로젝트 저장소를 초기화하고 웹 개발 환경을 설정합니다.",
-      "status": "pending",
+      "status": "done",
       "dependencies": [],
       "priority": "high",
       "details": "1. 'seoro-project'라는 이름의 새 Git 저장소를 만듭니다.\n2. Node.js 및 npm으로 프로젝트를 초기화합니다 (최신 LTS 버전 사용, 현재 18.16.0).\n3. Vite를 사용하여 React 프로젝트를 설정합니다 (최신 버전).\n4. 코드 품질 및 일관성을 위해 ESLint 및 Prettier를 구성합니다.\n5. 기본 폴더 구조를 설정합니다 (src/, components/, pages/, utils/ 등).\n6. node_modules, 빌드 아티팩트 및 환경별 파일을 제외하도록 .gitignore 파일을 만듭니다.\n7. 다양한 단계(개발, 스테이징, 프로덕션)에 대한 환경 변수를 설정합니다.\n8. Firebase 프로젝트를 초기화하고 Firebase SDK를 설치합니다 (최신 버전, 현재 10.1.0).\n9. 초기 보안 규칙으로 Firestore 데이터베이스를 설정합니다.",

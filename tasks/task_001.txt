@@ -1,6 +1,6 @@
 # Task ID: 1
 # Title: 프로젝트 저장소 및 웹 개발 환경 설정
-# Status: pending
+# Status: done
 # Dependencies: None
 # Priority: high
 # Description: Seoro 여행 플랫폼을 위한 프로젝트 저장소를 초기화하고 웹 개발 환경을 설정합니다.
