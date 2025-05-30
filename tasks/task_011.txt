@@ -102,3 +102,9 @@
 6. 포커스 관리 및 오류 안내 개선
 7. WCAG 기준에 따른 접근성 검토
 
+## 8. 관리자페이지 - 이미지카드 페이지에서 기존에 저장되었던 배열 표시해주기 [pending]
+### Dependencies: None
+### Description: 
+### Details:
+
+

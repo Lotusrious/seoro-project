@@ -1,38 +1,42 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
+import AdminLayout from './components/admin/AdminLayout';
 import MainPage from './pages/MainPage';
-import KeywordRecommendPage from './pages/KeywordRecommendPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import MyPage from './pages/MyPage';
-import ProtectedRoute from './components/ProtectedRoute';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
-import AdminProtectedRoute from './components/AdminProtectedRoute';
+import ImageCardManagementPage from './pages/admin/ImageCardManagementPage';
+import MapPage from './pages/MapPage';
+import CommunityPage from './pages/CommunityPage';
+import TravelLog from './pages/TravelLog';
+import ChatPage from './pages/ChatPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/keyword-recommend" element={<KeywordRecommendPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-
-        <Route element={<ProtectedRoute />}>
-          <Route path="/mypage" element={<MyPage />} />
-        </Route>
-
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route element={<AdminProtectedRoute />}>
-          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-        </Route>
-
-        {/* 다른 페이지들에 대한 라우트를 여기에 추가합니다. */}
-        {/* 예시: <Route path="/other1" element={<OtherPage1 />} /> */}
-        {/* 예시: <Route path="/other2" element={<OtherPage2 />} /> */}
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/mypage" element={<ProtectedRoute><MyPage /></ProtectedRoute>} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route element={<AdminProtectedRoute><AdminLayout /></AdminProtectedRoute>}>
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+            <Route path="/admin/image-card-management" element={<ImageCardManagementPage />} />
+          </Route>
+          <Route path="/map" element={<MapPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/travellog" element={<TravelLog />} />
+          <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

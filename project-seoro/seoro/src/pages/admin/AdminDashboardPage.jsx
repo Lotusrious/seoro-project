@@ -1,50 +1,75 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { useAuth } from '../../contexts/AuthContext.jsx';
+import { useNavigate, Link } from 'react-router-dom';
+
+const DashboardContainer = styled.div`
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  color: #333;
+  margin-bottom: 30px;
+`;
+
+const StyledLink = styled(Link)`
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const LogoutButton = styled.button`
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #c82333;
+  }
+`;
 
 function AdminDashboardPage() {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
-
   useEffect(() => {
-    document.title = '관리자페이지';
-    // 컴포넌트 언마운트 시 원래 제목으로 돌리고 싶다면:
-    // return () => {
-    //   document.title = '원래 페이지 제목'; // 메인 페이지 제목 등으로 변경
-    // };
+    document.title = "어드민 대시보드";
   }, []);
 
-  // TODO: 로그인 상태 확인 로직 필요 (예: 인증된 사용자만 접근 가능) -> AdminProtectedRoute가 처리
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logout();
       navigate('/admin/login');
-      console.log('Admin logged out successfully');
     } catch (error) {
-      console.error('Failed to log out admin:', error);
-      // 사용자에게 로그아웃 실패 알림 (필요시)
+      console.error("Failed to log out:", error);
+      alert("로그아웃에 실패했습니다.");
     }
   };
 
   return (
-    <div>
-      <h1>관리자 대시보드</h1>
-      <p>환영합니다, 관리자님!</p>
-      {/* TODO: 여기에 관리자 기능들을 추가합니다. */}
-      {/* 예: 이미지 카드 관리, 사용자 관리 등 */}
-      <div>
-        <h2>이미지 카드 관리</h2>
-        {/* 카드 목록, 추가, 수정, 삭제 UI가 여기에 들어갑니다. */}
-        <p>이미지 카드 관리 기능이 여기에 표시됩니다.</p>
-      </div>
-      <button 
-        onClick={handleLogout} 
-        className="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg focus:outline-none focus:shadow-outline"
-      >
-        로그아웃
-      </button>
-    </div>
+    <DashboardContainer>
+      <Title>어드민 대시보드</Title>
+      <p>환영합니다, {currentUser?.email} 님!</p>
+      <StyledLink to="/admin/image-card-management">키워드 이미지 카드 관리</StyledLink>
+      {/* 추가적인 관리자 기능 링크들을 여기에 추가할 수 있습니다. */}
+      <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+    </DashboardContainer>
   );
 }
 
