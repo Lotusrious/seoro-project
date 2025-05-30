@@ -1,9 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import logoSrc from '../assets/logo.png';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { currentUser, logout } = useAuth();
+
   const menuItemStyle =
     'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-white text-[#121715] text-sm font-medium leading-normal tracking-[0.015em] hover:bg-gray-200 transition-colors duration-150';
 
@@ -13,6 +16,19 @@ const Header = () => {
 
   const handleLoginClick = () => {
     navigate('/login');
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
+
+  const handleMypageClick = () => {
+    navigate('/mypage');
   };
 
   return (
@@ -33,9 +49,20 @@ const Header = () => {
           </button>
         </nav>
         <div className="flex items-center gap-2">
-          <button className={menuItemStyle} onClick={handleLoginClick}>
-            <span className="truncate">로그인</span>
-          </button>
+          {currentUser ? (
+            <>
+              <button className={menuItemStyle} onClick={handleMypageClick}>
+                <span className="truncate">{currentUser.displayName || '마이페이지'}</span>
+              </button>
+              <button className={menuItemStyle} onClick={handleLogout}>
+                <span className="truncate">로그아웃</span>
+              </button>
+            </>
+          ) : (
+            <button className={menuItemStyle} onClick={handleLoginClick}>
+              <span className="truncate">로그인</span>
+            </button>
+          )}
           <button className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-white text-[#121715] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 hover:bg-gray-200 transition-colors duration-150">
             <div
               className="text-[#121715]"
