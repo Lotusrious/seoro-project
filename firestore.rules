@@ -5,5 +5,13 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if request.auth != null;
     }
+
+    // 'users' 컬렉션에 대한 규칙
+    match /users/{userId} {
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null;
+      allow update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if false; // 기본적으로 삭제 비허용
+    }
   }
 } 
