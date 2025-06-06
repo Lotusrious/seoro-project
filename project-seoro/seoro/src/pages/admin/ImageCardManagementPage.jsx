@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import AdminHeader from '../../components/AdminHeader'; // AdminHeader로 변경
 // import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'; // 제거
 // import { Link } from 'react-router-dom'; // Link 임포트 제거
 import { db as firestore } from '../../firebaseConfig'; // db를 firestore 별칭으로 가져옴
@@ -370,7 +371,7 @@ function ImageCardManagementPage() {
   return (
     <>
       <GlobalStyle />
-      {/* <DragDropContext onDragEnd={onDragEnd}> 제거 */}
+      <AdminHeader />
       <PageContainer>
         {/* <BackButton to="/admin/dashboard">← 뒤로가기</BackButton> 제거 */}
         <Section>

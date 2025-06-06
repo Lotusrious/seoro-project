@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
-import { app } from '../firebaseConfig.js';
+// 호환성 SDK로 변경되었으므로, 필요한 함수들은 auth 객체의 메서드로 호출됩니다.
+// import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
+// app 대신 auth를 직접 import 합니다.
+import { auth } from '../firebaseConfig.js'; 
+import firebase from 'firebase/compat/app'; // GoogleAuthProvider를 위해 추가
+
 // import { GoogleLogin } from 'react-google-login';
 
 const LoginPage = () => {
@@ -15,7 +19,7 @@ const LoginPage = () => {
   const [resetEmail, setResetEmail] = useState('');
   const [resetMessage, setResetMessage] = useState('');
   const navigate = useNavigate();
-  const auth = getAuth(app);
+  // auth 객체를 firebaseConfig에서 직접 가져오므로 getAuth(app)은 필요 없습니다.
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
@@ -23,7 +27,8 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      // 호환성 SDK의 메서드를 사용합니다.
+      const userCredential = await auth.signInWithEmailAndPassword(email, password);
       // 로그인 성공 처리
       setLoading(false);
       // console.log('로그인 성공:', userCredential.user);
@@ -57,10 +62,12 @@ const LoginPage = () => {
   const handleGoogleLogin = async () => {
     setError(''); // 이전 오류 메시지 초기화
     setLoading(true); // 로딩 상태 시작 (버튼 등 UI 변경 위함)
-    const provider = new GoogleAuthProvider();
+    // 호환성 SDK 방식으로 GoogleAuthProvider를 생성합니다.
+    const provider = new firebase.auth.GoogleAuthProvider();
 
     try {
-      const result = await signInWithPopup(auth, provider);
+      // 호환성 SDK의 메서드를 사용합니다.
+      const result = await auth.signInWithPopup(provider);
       // Google 로그인 성공
       setLoading(false);
       // const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -102,7 +109,8 @@ const LoginPage = () => {
     setResetMessage(''); // 이전 메시지 초기화
 
     try {
-      await sendPasswordResetEmail(auth, resetEmail);
+      // 호환성 SDK의 메서드를 사용합니다.
+      await auth.sendPasswordResetEmail(resetEmail);
       setLoading(false);
       setResetMessage('비밀번호 재설정 이메일을 발송했습니다. 이메일을 확인해주세요.');
       // setShowPasswordReset(false); // 성공 후 UI를 닫을 수도 있음

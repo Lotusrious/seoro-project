@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+// signInWithEmailAndPassword는 이제 auth 객체의 메서드이므로 직접 import하지 않습니다.
+// import { signInWithEmailAndPassword } from 'firebase/auth'; 
 import { auth } from '../../firebaseConfig';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -25,7 +26,8 @@ function AdminLoginPage() {
     setLoading(true);
     setError('');
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      // 호환성 SDK 방식으로 로그인 메서드 호출
+      await auth.signInWithEmailAndPassword(email, password);
       console.log('Admin Logged In Successfully with email:', email);
       
       console.log('AdminLoginPage: currentUser after login attempt (from context):', currentUser);

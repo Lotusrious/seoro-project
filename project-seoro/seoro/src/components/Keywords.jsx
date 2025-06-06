@@ -10,24 +10,19 @@ const Keywords = () => {
   useEffect(() => {
     const fetchKeywords = async () => {
       try {
-        const docRef = doc(firestore, 'mainPageData', 'imageCardsConfig');
+        const docRef = doc(firestore, "mainPageData", "imageCardsConfig");
         const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          // null이 아닌 슬롯만 필터링하고, 각 슬롯에 id가 없으면 임시 id 생성 (key로 사용하기 위함)
-          const validSlots = (data.slots || []).filter(slot => slot !== null).map((slot, index) => ({
-            ...slot,
-            // Firestore에 저장된 id가 있으면 사용, 없으면 mock 데이터의 id나 인덱스 기반 id 사용
-            id: slot.id || `keyword-card-${index}` 
-          }));
-          setCards(validSlots);
+        if (docSnap.exists() && docSnap.data().slots) {
+          // Firestore에서 가져온 slots 배열을 cards 상태에 설정
+          // null이 아닌 유효한 데이터만 필터링할 수도 있습니다.
+          const fetchedCards = docSnap.data().slots.filter(slot => slot !== null);
+          setCards(fetchedCards);
         } else {
-          console.log('No such document in Firestore!');
-          setCards([]); // 문서가 없으면 빈 배열로 설정
+          setError("키워드 설정 데이터를 찾을 수 없습니다.");
         }
       } catch (err) {
-        console.error('Error fetching keywords from Firestore:', err);
+        console.error("Firestore에서 키워드 데이터 가져오기 실패:", err);
         setError('키워드를 불러오는 데 실패했습니다.');
       } finally {
         setLoading(false);

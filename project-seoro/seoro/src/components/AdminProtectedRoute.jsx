@@ -1,9 +1,9 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx'; // 기존 AuthContext 사용
 
 // AdminProtectedRoute는 children prop을 받아야 합니다.
-const AdminProtectedRoute = ({ children }) => {
+const AdminProtectedRoute = () => {
   const { currentUser, loading } = useAuth(); // loading 상태 추가
   const location = useLocation();
 
@@ -32,7 +32,7 @@ const AdminProtectedRoute = ({ children }) => {
 
   // 로딩이 끝났고, currentUser가 있으며 isAdmin이 true인 경우
   // console.log('AdminProtectedRoute: Access granted.', { currentUser });
-  return children; 
+  return <Outlet />; 
 };
 
 export default AdminProtectedRoute; 

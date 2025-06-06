@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { db } from '../firebaseConfig.js'; // db (Firestore 인스턴스) 가져오기
-import { doc, setDoc, serverTimestamp } from "firebase/firestore"; // Firestore 함수 가져오기
-import { app } from '../firebaseConfig.js'; // Firebase 앱 인스턴스 가져오기
+// 호환성 SDK로 변경되었으므로, 필요한 함수들은 auth, db 객체의 메서드로 호출됩니다.
+// import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from '../firebaseConfig.js'; // auth, db (Firestore 인스턴스) 가져오기
+// import { doc, setDoc, serverTimestamp } from "firebase/firestore"; // Firestore 함수 가져오기
+// import { app } from '../firebaseConfig.js'; // Firebase 앱 인스턴스 가져오기
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const SignupPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const auth = getAuth(app);
+  // auth 객체를 firebaseConfig에서 직접 가져오므로 getAuth(app)은 필요 없습니다.
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,19 +32,20 @@ const SignupPage = () => {
     // TODO: 추가적인 비밀번호 정책 검사 (예: 최소 길이)
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // 호환성 SDK의 메서드를 사용합니다.
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
       const user = userCredential.user; // 사용자 객체 가져오기
 
-      // Firebase Authentication 프로필에 닉네임 업데이트
-      await updateProfile(user, { displayName: nickname });
+      // Firebase Authentication 프로필에 닉네임 업데이트 (호환성 SDK 방식)
+      await user.updateProfile({ displayName: nickname });
       
-      // Firestore에 사용자 정보 저장
-      await setDoc(doc(db, "users", user.uid), {
+      // Firestore에 사용자 정보 저장 (호환성 SDK 방식)
+      await db.collection("users").doc(user.uid).set({
         uid: user.uid,
         email: user.email,
-        displayName: nickname, // updateProfile 후의 닉네임 또는 직접 입력받은 닉네임
-        photoURL: user.photoURL, // 기본값은 null일 수 있음
-        createdAt: serverTimestamp() // 서버 타임스탬프 사용
+        displayName: nickname, 
+        photoURL: user.photoURL,
+        createdAt: new Date() // 호환성 SDK에서는 new Date()를 사용하거나 FieldValue.serverTimestamp()를 사용
       });
 
       // 회원가입 성공 처리
